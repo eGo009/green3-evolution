@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Evolution</title>
@@ -13,10 +7,11 @@ and open the template in the editor.
     <body>
         <div style="width: 50%;">Preparation phase:
         <ul>
-            <li>1. Check network connection (Ask Andrew)</li>
-            <li>2. Design architecture</li>
-            <li>3. Design database layer</li>
-            <li>4. Design UI</li>
+            <li style="color: green;">1. Network connection established</li>
+            <li style="color: green;">2. Git was integrated to the project</li>
+            <li>3. Design architecture</li>
+            <li>4. Design database layer</li>
+            <li>5. Design UI</li>
         </ul>
         </div>
         <div style="width: 50%;"><img src="img/evo-box-set.jpg" alt="Evolution"/></div>
