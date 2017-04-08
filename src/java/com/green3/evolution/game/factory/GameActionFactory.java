@@ -7,9 +7,8 @@ package com.green3.evolution.game.factory;
 
 
 import com.green3.evolution.action.Action;
-import com.green3.evolution.game.action.GameActionType;
-import com.green3.evolution.game.action.FeedAction;
-import com.green3.evolution.game.action.UseCardAction;
+import com.green3.evolution.game.action.*;
+
 /**
  *
  * @author Alex_Ihnatsiuck
@@ -24,11 +23,14 @@ public class GameActionFactory {
                 break;
             case USE_CARD:
                 action = new UseCardAction();
-                break;            
+                break;
+            case GET_GAMEBOARD:
+                action = new GetGameboardAction();
+                break;
+            default:
+                action = new GetGameboardAction();
         }
         return action;
     }
-    
-    
 
 }

@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.green3.evolution.game.GameConstants;
 import com.green3.evolution.game.action.GameActionType;
 import com.green3.evolution.game.factory.GameActionFactory;
+import com.green3.evolution.model.CommonEntity;
+
 
 /**
  *
@@ -34,15 +36,18 @@ public class GameServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String operation = (String) request.getParameter(GameConstants.PARAM_OPERATION);
-        if (null==operation){
-            return;
-        }        
-        GameActionType operationType = GameActionType.valueOf(operation.toUpperCase());
+        GameActionType operationType = GameActionType.GET_GAMEBOARD;
+        if (null!=operation && !operation.isEmpty()){
+            operationType = GameActionType.valueOf(operation.toUpperCase());
+        }
         Action action = GameActionFactory.createAction(operationType);
         if (null==action){
             return;
         }
-        action.execute();                
+        CommonEntity model = action.execute();
+        request.setAttribute("gameboard", model);
+        getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
+        //response.sendRedirect("/jsp/game/gameboard.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

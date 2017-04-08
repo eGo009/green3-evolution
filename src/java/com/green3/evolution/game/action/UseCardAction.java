@@ -6,6 +6,7 @@
 package com.green3.evolution.game.action;
 
 import com.green3.evolution.action.Action;
+import com.green3.evolution.model.CommonEntity;
 /**
  *
  * @author Alex_Ihnatsiuck
@@ -13,7 +14,8 @@ import com.green3.evolution.action.Action;
 public class UseCardAction implements Action{
     
     @Override
-    public void execute(){
+    public CommonEntity execute(){
         System.out.println("Use card");
+        return null;
     }
 }

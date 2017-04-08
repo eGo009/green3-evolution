@@ -10,5 +10,5 @@ package com.green3.evolution.game.action;
  * @author Alex_Ihnatsiuck
  */
 public enum GameActionType {
-    FEED, USE_CARD   
+    FEED, USE_CARD, GET_GAMEBOARD   
 }
