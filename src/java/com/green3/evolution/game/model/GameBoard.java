@@ -20,6 +20,12 @@ public class GameBoard implements Serializable, CommonEntity{
     private String id;
     private int currentRound;
     
+    // 0 - evolution
+    // 1 - feed
+    // 2 - extinction   
+    private int roundStage;
+        
+    
     // 0 - created;
     // 1 - started;
     // 2 - finished;
@@ -62,6 +68,14 @@ public class GameBoard implements Serializable, CommonEntity{
     public int getCurrentRound(){
         return currentRound;
     } 
+    
+    public void setRoundStage(int pRoundStage){
+        roundStage = pRoundStage;
+    }
+
+    public int getRoundStage(){
+        return roundStage;
+    }
     
     
     public void setCardDeck(List<String> pCardDeck){

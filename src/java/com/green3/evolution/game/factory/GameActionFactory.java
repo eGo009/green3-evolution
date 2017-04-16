@@ -27,6 +27,9 @@ public class GameActionFactory {
             case GET_GAMEBOARD:
                 action = new GetGameboardAction();
                 break;
+            case GET_CARDS:
+                action = new GetCardsAction();
+                break;
             default:
                 action = new GetGameboardAction();
         }

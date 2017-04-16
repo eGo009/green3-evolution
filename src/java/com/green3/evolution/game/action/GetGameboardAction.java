@@ -22,8 +22,9 @@ public class GetGameboardAction implements Action{
     public CommonEntity execute(){
         System.out.println("Get gameboard");
         GameBoard gameboard = new GameBoard();
-        gameboard.setNumber(222);
+        gameboard.setNumber(1);
         gameboard.setCurrentRound(1);
+        gameboard.setRoundStage(0);
         List<String> cardDeck = new ArrayList<String>();
         cardDeck.add("asdasd");
         cardDeck.add("gfdgdfgd");
