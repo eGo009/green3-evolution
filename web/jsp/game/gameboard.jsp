@@ -42,7 +42,7 @@
             </div> <!-- end of header -->
             <div id="tooplate_main">
                 <div class="content_box">
-                    <div class="content_title content_ct"><h2>Game ${gameboard.number} (Status ${gameboard.status}) || Round ${gameboard.currentRound} || Stage ${gameboard.roundStage} </h2></div>
+                    <div class="content_title content_ct"><h2>Game ${gameId} (Status ${gameboard.status}) || Round ${gameboard.currentRound} || Stage ${gameboard.roundStage} </h2></div>
 
                 </div>
                 <div class="content">

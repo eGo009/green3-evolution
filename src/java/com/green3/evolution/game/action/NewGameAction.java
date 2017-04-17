@@ -13,10 +13,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Alex_Ihnatsiuck
@@ -27,7 +30,7 @@ public class NewGameAction extends DBAction{
     
     @Override
     public CommonEntity doAction(Connection connection){
-        int gameId = createNewGame();
+        int gameId = createNewGame(connection);
         addPlayerToGame(gameId, "user1");
         GameBoard game = new GameBoard();
         game.setId(gameId);
@@ -50,8 +53,29 @@ public class NewGameAction extends DBAction{
        return game;
     }
     
-    private int createNewGame(){
-        return 1;
+    private int createNewGame(Connection connection){
+        int newGameId = -1;
+        try {
+            PreparedStatement statement = connection.prepareStatement("insert into ev_g_game (state) VALUES (?);",
+                    Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1,0);
+            statement.execute();
+            /*int affectedRows = statement.executeUpdate();
+            if (affectedRows==0){
+                throw new SQLException("Creating user failed, no affected rows.");
+            }*/
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                newGameId = generatedKeys.getInt(1);
+            }
+            else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewGameAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newGameId;
     }
     private void addPlayerToGame(int gameId, String userId){
         

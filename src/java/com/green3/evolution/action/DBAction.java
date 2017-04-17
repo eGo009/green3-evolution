@@ -52,19 +52,12 @@ public abstract class DBAction implements Action{
         Connection connection = null;
         String url = "jdbc:mysql://localhost:3306/evolutiondb";
         String username = "root";
-        String password = "admin123";
+        String password = "vitautas4";
         try {
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Database connected!");
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
-        }
-        finally{
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(DBAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return connection;
     }
