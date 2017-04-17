@@ -17,7 +17,7 @@ import java.util.Set;
 public class GameBoard implements Serializable, CommonEntity{
     
     private int number;
-    private String id;
+    private int id;
     private int currentRound;
     
     // 0 - evolution
@@ -43,11 +43,11 @@ public class GameBoard implements Serializable, CommonEntity{
     }    
     
     
-    public void setId(String pId){
+    public void setId(int pId){
         id = pId;
     }
 
-    public String getId(){
+    public int getId(){
         return id;
     } 
     

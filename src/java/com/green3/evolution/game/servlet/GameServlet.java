@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.green3.evolution.game.GameConstants;
 import com.green3.evolution.game.action.GameActionType;
 import com.green3.evolution.game.factory.GameActionFactory;
+import com.green3.evolution.game.model.GameBoard;
 import com.green3.evolution.model.CommonEntity;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -45,8 +47,17 @@ public class GameServlet extends HttpServlet {
             return;
         }
         CommonEntity model = action.execute();
-        request.setAttribute("gameboard", model);
-        getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
+        if (GameActionType.NEW_GAME==operationType){
+            int gameId = ((GameBoard) model).getId();
+            HttpSession session = request.getSession();
+            session.setAttribute("gameId", gameId);
+            response.sendRedirect("/green3-evolution/game");
+            
+        } else{
+            request.setAttribute("gameboard", model);
+            getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
+        }
+        
         //response.sendRedirect("/jsp/game/gameboard.jsp");
     }
 

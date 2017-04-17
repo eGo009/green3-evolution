@@ -27,7 +27,11 @@ public class NewGameAction extends DBAction{
     
     @Override
     public CommonEntity doAction(Connection connection){
-        try{
+        int gameId = createNewGame();
+        addPlayerToGame(gameId, "user1");
+        GameBoard game = new GameBoard();
+        game.setId(gameId);
+       /* try{
             PreparedStatement getCardsStatement = connection.prepareStatement("SELECT c.id, p.type, p.description  FROM ev_g_card AS c \n" +
 "  JOIN ev_g_card_property AS cp ON c.id=cp.card_id\n" +
 "  JOIN ev_g_property AS p ON cp.property_id=p.ID\n" +
@@ -42,7 +46,14 @@ public class NewGameAction extends DBAction{
         }
         catch (SQLException sex){
             throw new IllegalStateException("Cannot get cards from database!", sex);
-        }
-        return null;
+        }*/
+       return game;
     }
+    
+    private int createNewGame(){
+        return 1;
+    }
+    private void addPlayerToGame(int gameId, String userId){
+        
+    }   
 }

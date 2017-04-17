@@ -35,7 +35,7 @@
                     <div id="tooplate_menu">
                         <ul>
                             <li><a href="">Hi, Player!</a></li>
-                            <li><a href="jsp/game/gamecreation.jsp">New Game</a></li>
+                            <li><a href="/green3-evolution/game?op=new_game">New Game</a></li>
                             <li><a href="#aboutus">Join Game</a></li>
                             <li><a href="#blog">Rules</a></li>
                             <li><a href="#portfolio">Rating</a></li>

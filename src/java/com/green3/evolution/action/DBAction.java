@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Alex_Ihnatsiuck
@@ -28,8 +30,13 @@ public abstract class DBAction implements Action{
         registerDBDriver();
         
         Connection connection = getConnection();
-        
-        return doAction(connection);
+        CommonEntity result = doAction(connection);
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     private void registerDBDriver() {
@@ -45,12 +52,19 @@ public abstract class DBAction implements Action{
         Connection connection = null;
         String url = "jdbc:mysql://localhost:3306/evolutiondb";
         String username = "root";
-        String password = "vitautas4";
+        String password = "admin123";
         try {
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Database connected!");
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
+        }
+        finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return connection;
     }
