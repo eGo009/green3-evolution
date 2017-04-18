@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,11 +27,11 @@ public abstract class DBAction implements Action{
     
        
     @Override
-    public final CommonEntity execute(){
+    public final CommonEntity execute(Map<String,Object> params){
         registerDBDriver();
         
         Connection connection = getConnection();
-        CommonEntity result = doAction(connection);
+        CommonEntity result = doAction(connection, params);
         try {
             connection.close();
         } catch (SQLException ex) {
@@ -62,5 +63,5 @@ public abstract class DBAction implements Action{
         return connection;
     }
 
-    public abstract CommonEntity doAction(Connection connection);    
+    public abstract CommonEntity doAction(Connection connection, Map<String,Object> params);    
 }

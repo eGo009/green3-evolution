@@ -6,6 +6,7 @@
 package com.green3.evolution.game.action;
 
 import com.green3.evolution.action.DBAction;
+import com.green3.evolution.game.GameConstants;
 import com.green3.evolution.game.model.GameBoard;
 import com.green3.evolution.model.CommonEntity;
 
@@ -14,10 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -29,9 +27,10 @@ public class NewGameAction extends DBAction{
     
     
     @Override
-    public CommonEntity doAction(Connection connection){
+    public CommonEntity doAction(Connection connection, Map<String,Object> params){
         int gameId = createNewGame(connection);
-        addPlayerToGame(gameId, "user1");
+        String userId = (String)params.get(GameConstants.PARAM_USER_ID);
+        addPlayerToGame(gameId, userId);
         GameBoard game = new GameBoard();
         game.setId(gameId);
        /* try{

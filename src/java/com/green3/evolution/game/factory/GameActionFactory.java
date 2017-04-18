@@ -33,6 +33,9 @@ public class GameActionFactory {
             case NEW_GAME:
                 action = new NewGameAction();
                 break;
+            case USER_GAMES:
+                action = new GetUserGamesAction();
+                break;
             default:
                 action = new GetGameboardAction();
         }

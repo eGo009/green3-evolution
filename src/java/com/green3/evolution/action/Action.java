@@ -6,6 +6,7 @@
 package com.green3.evolution.action;
 
 import com.green3.evolution.model.CommonEntity;
+import java.util.Map;
 
 /**
  *
@@ -13,5 +14,5 @@ import com.green3.evolution.model.CommonEntity;
  */
 public interface Action {
     
-    CommonEntity execute();
+    CommonEntity execute(Map<String,Object> params);
 }

@@ -11,6 +11,7 @@ import com.green3.evolution.model.CommonEntity;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 /**
  *
@@ -19,7 +20,7 @@ import java.util.Set;
 public class GetGameboardAction implements Action{
     
     @Override
-    public CommonEntity execute(){
+    public CommonEntity execute(Map<String,Object> params){
         System.out.println("Get gameboard");
         GameBoard gameboard = new GameBoard();
         gameboard.setNumber(1);

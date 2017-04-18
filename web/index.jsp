@@ -37,6 +37,7 @@
                             <li><a href="">Hi, Player!</a></li>
                             <li><a href="/green3-evolution/game?op=new_game">New Game</a></li>
                             <li><a href="#aboutus">Join Game</a></li>
+                            <li><a href="/green3-evolution/game?op=user_games">My Games</a></li>
                             <li><a href="#blog">Rules</a></li>
                             <li><a href="#portfolio">Rating</a></li>
                             <li class="last"><a href="#contactus">Logout</a></li>

@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <title>Evolution</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
@@ -25,6 +26,7 @@
         </script>
 
     </head>
+    <body>       
     <span id="top"></span>
     <div id="tooplate_body_wrapper">
         <div id="tooplate_wrapper">
@@ -41,15 +43,45 @@
                 </div> <!-- end of tooplate_menu -->         
             </div> <!-- end of header -->
             <div id="tooplate_main">
-                <div class="content_box">
-                    <div class="content_title content_ct"><h2>Game ${gameId} (Status ${gameboard.status}) || Round ${gameboard.currentRound} || Stage ${gameboard.roundStage} </h2></div>
-                    <div class="content">
-                        <ul>
-                            <li> Players: ${gameboard.players}</li>
-                            <li> Cards left: ${gameboard.cardsLeft}</li>
-                        </ul>
-                    </div>
-                </div>
+                <c:if test="${not empty gameContainer.createdGames}">
+                   <div class="content_box">
+                        <div class="content_title content_ct"><h2>Not started games</h2></div>
+                        <div class="content">                            
+                            <ul>
+                                <c:forEach var="gameItem" items="${gameContainer.createdGames}">
+                                    <li>Game ${gameItem.id}</li>
+                                </c:forEach>
+                            </ul>
+                        </div> 
+                   </div>
+                </c:if>
+                <c:if test="${not empty gameContainer.ongoingGames}">
+                   <div class="content_box">
+                        <div class="content_title content_ct"><h2>Ongoing games</h2></div>
+
+                        <div class="content">                            
+                            <ul>
+                                <c:forEach var="gameItem" items="${gameContainer.ongoingGames}">
+                                    <li>Game ${gameItem.id}</li>
+                                </c:forEach>
+                            </ul>
+                        </div> 
+                   </div>
+                </c:if>
+                <c:if test="${not empty gameContainer.finishedGames}">
+                   <div class="content_box">
+                        <div class="content_title content_ct"><h2>Finished games</h2></div>
+
+                        <div class="content">                            
+                            <ul>
+                                <c:forEach var="gameItem" items="${gameContainer.finishedGames}">
+                                    <li>Game ${gameItem.id}</li>
+                                </c:forEach>
+                            </ul>
+                        </div> 
+                   </div> 
+                </c:if>
+                
             </div>            
         </div>
     </div>

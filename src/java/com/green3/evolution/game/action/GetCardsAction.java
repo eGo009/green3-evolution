@@ -6,17 +6,14 @@
 package com.green3.evolution.game.action;
 
 import com.green3.evolution.action.DBAction;
-import com.green3.evolution.game.model.GameBoard;
 import com.green3.evolution.model.CommonEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Map;
+
 /**
  *
  * @author Alex_Ihnatsiuck
@@ -26,7 +23,7 @@ public class GetCardsAction extends DBAction{
     
     
     @Override
-    public CommonEntity doAction(Connection connection){
+    public CommonEntity doAction(Connection connection, Map<String,Object> params){
         try{
             PreparedStatement getCardsStatement = connection.prepareStatement("SELECT c.id, p.type, p.description  FROM ev_g_card AS c \n" +
 "  JOIN ev_g_card_property AS cp ON c.id=cp.card_id\n" +

@@ -7,6 +7,7 @@ package com.green3.evolution.game.action;
 
 import com.green3.evolution.action.Action;
 import com.green3.evolution.model.CommonEntity;
+import java.util.Map;
 /**
  *
  * @author Alex_Ihnatsiuck
@@ -14,7 +15,7 @@ import com.green3.evolution.model.CommonEntity;
 public class FeedAction implements Action{
     
     @Override
-    public CommonEntity execute(){
+    public CommonEntity execute(Map<String,Object> params){
         System.out.println("FEED the animal");
         return  null;
     }

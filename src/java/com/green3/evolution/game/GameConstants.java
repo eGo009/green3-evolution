@@ -11,6 +11,8 @@ package com.green3.evolution.game;
  */
 public class GameConstants {
     public static final String PARAM_OPERATION = "op";
+    public static final String PARAM_USER_ID = "userId";
+    public static final String PARAM_GAME_ID = "gameId";
     
     
 }

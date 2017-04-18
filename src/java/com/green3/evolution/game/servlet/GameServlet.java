@@ -17,6 +17,8 @@ import com.green3.evolution.game.action.GameActionType;
 import com.green3.evolution.game.factory.GameActionFactory;
 import com.green3.evolution.game.model.GameBoard;
 import com.green3.evolution.model.CommonEntity;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 
@@ -46,19 +48,33 @@ public class GameServlet extends HttpServlet {
         if (null==action){
             return;
         }
-        CommonEntity model = action.execute();
-        if (GameActionType.NEW_GAME==operationType){
-            int gameId = ((GameBoard) model).getId();
-            HttpSession session = request.getSession();
-            session.setAttribute("gameId", gameId);
-            response.sendRedirect("/green3-evolution/game");
-            
-        } else{
-            request.setAttribute("gameboard", model);
-            getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
-        }
+        Map<String,Object> params = createParamsMap(request, operationType);
+        CommonEntity model = action.execute(params);
         
-        //response.sendRedirect("/jsp/game/gameboard.jsp");
+        switch (operationType){
+            case FEED: 
+                break;
+            case USE_CARD:
+                  break;
+            case GET_GAMEBOARD:
+                request.setAttribute("gameboard", model);
+                getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
+                break;
+            case GET_CARDS:
+                break;
+            case NEW_GAME:
+                int gameId = ((GameBoard) model).getId();
+                HttpSession session = request.getSession();
+                session.setAttribute(GameConstants.PARAM_GAME_ID, gameId);
+                response.sendRedirect("/green3-evolution/game");
+                break;
+            case USER_GAMES:
+                request.setAttribute("gameContainer", model);
+                getServletContext().getRequestDispatcher("/jsp/my-games.jsp").forward(request, response);
+            default:
+                request.setAttribute("gameboard", model);
+                getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -99,5 +115,24 @@ public class GameServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Map<String, Object> createParamsMap(HttpServletRequest request, GameActionType operationType) {
+        Map<String, Object> paramsMap = new HashMap<String,Object>();
+        Object gameIdParam = request.getSession().getAttribute("gameId");
+        if (gameIdParam!=null){
+            int gameId = (int)gameIdParam;
+            paramsMap.put(GameConstants.PARAM_GAME_ID, gameId);
+        }
+        
+        Object userIdParam = request.getSession().getAttribute("userId");
+        if (userIdParam!=null){
+            String userId = (String)userIdParam;
+            paramsMap.put(GameConstants.PARAM_USER_ID, userId);
+        }
+        else{
+            paramsMap.put(GameConstants.PARAM_USER_ID, "user1");
+        }
+        return paramsMap;
+    }
 
 }
