@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,13 +44,32 @@
             </div> <!-- end of header -->
             <div id="tooplate_main">
                 <div class="content_box">
-                    <div class="content_title content_ct"><h2>Game ${gameId} (Status ${gameboard.status}) || Round ${gameboard.currentRound} || Stage ${gameboard.roundStage} </h2></div>
+                    
+                    <div class="content_title content_ct"><h2>Game ${gameId} (Status ${gameboard.status}) </h2></div>
                     <div class="content">
-                        <ul>
-                            <li> Players: ${gameboard.players}</li>
-                            <li> Cards left: ${gameboard.cardsLeft}</li>
-                        </ul>
+                        <c:choose>
+                            <c:when test="${gameboard.status eq 0}">
+                                Press <a href="">start</a> to run a game!
+                            </c:when>
+                            <c:when test="${gameboard.status eq 1}">
+                                <ul>
+                                    <li> Cards left: ${gameboard.cardsLeft}</li>
+                                    <li> Round ${gameboard.currentRound}</li>
+                                    <li> Stage ${gameboard.roundStage}</li>
+                                    <li> Turn of player ace</li>
+                                    
+                               </ul>
+                            </c:when>
+                        </c:choose>
+                        
                     </div>
+                    <c:forEach items="${gameboard.players}" var="player">
+                        <div class="content_title content_ct">
+                            <h3>
+                                ${player}
+                            </h3>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>            
         </div>

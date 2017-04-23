@@ -49,7 +49,7 @@
                         <div class="content">                            
                             <ul>
                                 <c:forEach var="gameItem" items="${gameContainer.createdGames}">
-                                    <li>Game ${gameItem.id}</li>
+                                    <li><a href="/green3-evolution/game?op=choose_game&gameId=${gameItem.id}">Game ${gameItem.id}</a></li>
                                 </c:forEach>
                             </ul>
                         </div> 
@@ -62,7 +62,7 @@
                         <div class="content">                            
                             <ul>
                                 <c:forEach var="gameItem" items="${gameContainer.ongoingGames}">
-                                    <li>Game ${gameItem.id}</li>
+                                    <li><a href="/green3-evolution/game?op=choose_game&gameId=${gameItem.id}">Game ${gameItem.id}</a></li>
                                 </c:forEach>
                             </ul>
                         </div> 

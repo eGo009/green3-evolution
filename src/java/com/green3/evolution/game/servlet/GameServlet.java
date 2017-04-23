@@ -71,6 +71,14 @@ public class GameServlet extends HttpServlet {
             case USER_GAMES:
                 request.setAttribute("gameContainer", model);
                 getServletContext().getRequestDispatcher("/jsp/my-games.jsp").forward(request, response);
+                break;
+            case CHOOSE_GAME:
+                String gameIdParam = (String) request.getParameter(GameConstants.PARAM_GAME_ID);
+                gameId = Integer.valueOf(gameIdParam);
+                session = request.getSession();
+                session.setAttribute(GameConstants.PARAM_GAME_ID, gameId);
+                response.sendRedirect("/green3-evolution/game");
+                break;
             default:
                 request.setAttribute("gameboard", model);
                 getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);

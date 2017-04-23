@@ -5,10 +5,17 @@
  */
 package com.green3.evolution.game.action;
 
+import com.green3.evolution.action.Action;
+import com.green3.evolution.model.CommonEntity;
+import java.util.Map;
 /**
  *
  * @author Alex_Ihnatsiuck
  */
-public enum GameActionType {
-    FEED, USE_CARD, GET_GAMEBOARD, GET_CARDS, NEW_GAME, INIT_GAME, USER_GAMES, CHOOSE_GAME   
+public class EmptyAction implements Action{
+    
+    @Override
+    public CommonEntity execute(Map<String,Object> params){
+        return null;
+    }
 }
