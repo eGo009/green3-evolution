@@ -9,6 +9,7 @@ import com.green3.evolution.action.DBAction;
 import com.green3.evolution.game.GameConstants;
 import com.green3.evolution.game.model.GameBoard;
 import com.green3.evolution.game.model.GamesContainer;
+import com.green3.evolution.game.model.Player;
 import com.green3.evolution.model.CommonEntity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,11 +32,15 @@ public class GetGameboardAction extends DBAction{
     public CommonEntity doAction(Connection con, Map<String,Object> params){
         int gameId = (int)params.get(GameConstants.PARAM_GAME_ID);
         
+        GameBoard game = getGameInfo(gameId, con);
+
+        return game;
+    }
+    
+    private GameBoard getGameInfo(int gameId, Connection con){
         GameBoard game = new GameBoard();
-        /*try{
-            PreparedStatement getGameInfoStatement = con.prepareStatement("SELECT g.id, g.state FROM ev_g_player AS p \n" +
-"JOIN ev_g_game AS g ON p.game_id=g.id\n" +
-"WHERE p.user_id=?;");
+        try{
+            PreparedStatement getGameInfoStatement = con.prepareStatement("SELECT g.id, g.state, g.round, g.stage FROM ev_g_game AS g WHERE g.id=?;");
             getGameInfoStatement.setInt(1, gameId);
             ResultSet rs = getGameInfoStatement.executeQuery();
             
@@ -44,37 +49,47 @@ public class GetGameboardAction extends DBAction{
                 int state = rs.getInt("state");
                 game.setStatus(state);
                 switch (state){
-                    case 0:
-                        
+                    case 0:                        
                         break;
                     case 1:
+                        int round = rs.getInt("round");
+                        int stage = rs.getInt("stage");
+                        game.setCurrentRound(round);
+                        game.setRoundStage(stage);
                         break;
                     case 2:
                         break;
                 }
+                game.setPlayers(getGamePlayers(gameId, con));
              }      
         }
         catch (SQLException ex){
             Logger.getLogger(NewGameAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         return game;
-        */
+    }
         
-        System.out.println("Get gameboard");
-        game.setId(gameId);
-        game.setStatus(0);
-        game.setCurrentRound(1);
-        game.setRoundStage(0);
-        List<String> cardDeck = new ArrayList<String>();
-        cardDeck.add("asdasd");
-        cardDeck.add("gfdgdfgd");
-        game.setCardDeck(cardDeck);
-        Set<String> players = new HashSet<String>();
-        players.add("dew");
-        players.add("ace");
-        players.add("nick");
-        game.setPlayers(players);
-        return game;
+    private List<Player> getGamePlayers(int gameId, Connection con){
+        List<Player> players = new ArrayList<Player>();
+        try{
+            PreparedStatement getGameInfoStatement = con.prepareStatement("SELECT p.id, p.user_id FROM ev_g_player AS p\n" +
+"WHERE p.game_id=?;");
+            getGameInfoStatement.setInt(1, gameId);
+            ResultSet rs = getGameInfoStatement.executeQuery();
+            
+            while (rs.next()) {
+                Player player = new Player();
+                int id = rs.getInt("id");
+                player.setId(id);
+                String user = rs.getString("user_id");
+                player.setUser(user);  
+                players.add(player);
+             }      
+        }
+        catch (SQLException ex){
+            Logger.getLogger(NewGameAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return players;
     }
     
     

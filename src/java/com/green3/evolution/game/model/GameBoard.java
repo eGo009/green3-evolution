@@ -8,7 +8,6 @@ package com.green3.evolution.game.model;
 import com.green3.evolution.model.CommonEntity;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -31,7 +30,7 @@ public class GameBoard implements Serializable, CommonEntity{
     // 2 - finished;
     private int status;
     private List<String> cardDeck;
-    private Set<String> players;
+    private List<Player> players;
     
      
     public void setNumber(int pNumber){
@@ -87,16 +86,19 @@ public class GameBoard implements Serializable, CommonEntity{
     } 
     
     
-    public void setPlayers(Set<String> pPlayers){
+    public void setPlayers(List<Player> pPlayers){
         players = pPlayers;
     }
 
-    public Set<String> getPlayers(){
+    public List<Player> getPlayers(){
         return players;
     }
     
     public int getCardsLeft(){
-        return getCardDeck().size();
+        if (getCardDeck()!=null){
+            return getCardDeck().size();
+        }
+        return 0;
     }
     
 }

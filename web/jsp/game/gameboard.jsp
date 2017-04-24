@@ -66,7 +66,7 @@
                     <c:forEach items="${gameboard.players}" var="player">
                         <div class="content_title content_ct">
                             <h3>
-                                ${player}
+                                ${player.user}
                             </h3>
                         </div>
                     </c:forEach>

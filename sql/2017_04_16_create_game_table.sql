@@ -1,10 +1,13 @@
 ﻿CREATE TABLE evolutiondb.ev_g_game (
   id int(11) NOT NULL AUTO_INCREMENT,
-  state int(11) NOT NULL,
+  state int(11) NOT NULL DEFAULT 0,
+  round int(11) NOT NULL DEFAULT 0,
+  stage int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 4
+AVG_ROW_LENGTH = 5461
 CHARACTER SET utf8
 COLLATE utf8_general_ci
 ROW_FORMAT = DYNAMIC;
