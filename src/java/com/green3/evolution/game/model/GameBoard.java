@@ -29,7 +29,7 @@ public class GameBoard implements Serializable, CommonEntity{
     // 1 - started;
     // 2 - finished;
     private int status;
-    private List<String> cardDeck;
+    private List<Card> cardDeck;
     private List<Player> players;
     
      
@@ -77,11 +77,11 @@ public class GameBoard implements Serializable, CommonEntity{
     }
     
     
-    public void setCardDeck(List<String> pCardDeck){
+    public void setCardDeck(List<Card> pCardDeck){
         cardDeck = pCardDeck;
     }
 
-    public List<String> getCardDeck(){
+    public List<Card> getCardDeck(){
         return cardDeck;
     } 
     

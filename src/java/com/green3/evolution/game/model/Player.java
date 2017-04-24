@@ -18,7 +18,7 @@ public class Player implements Serializable, CommonEntity{
     private int id;
     private String user;
     
-    private List<String> cardsOnHand;
+    private List<Card> cardsOnHand;
     private List<String> animals; 
     
     public void setId(int pId){
@@ -39,20 +39,20 @@ public class Player implements Serializable, CommonEntity{
     } 
     
     
-    public void setCardsOnHand(List<String> pCardsOnHand){
+    public void setCardsOnHand(List<Card> pCardsOnHand){
         cardsOnHand = pCardsOnHand;
     }
 
-    public List<String> getCardsOnHand(){
+    public List<Card> getCardsOnHand(){
         return cardsOnHand;
     } 
     
     
-    public void setPlayers(List<String> pAnimals){
+    public void setAnimals(List<String> pAnimals){
         animals = pAnimals;
     }
 
-    public List<String> getPlayers(){
+    public List<String> getAnimals(){
         return animals;
     }
     
