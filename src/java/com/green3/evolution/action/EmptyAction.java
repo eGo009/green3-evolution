@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.green3.evolution.game.action;
+package com.green3.evolution.action;
 
 import com.green3.evolution.action.Action;
 import com.green3.evolution.model.CommonEntity;

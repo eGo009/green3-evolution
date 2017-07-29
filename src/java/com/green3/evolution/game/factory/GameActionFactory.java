@@ -6,6 +6,7 @@
 package com.green3.evolution.game.factory;
 
 
+import com.green3.evolution.action.EmptyAction;
 import com.green3.evolution.action.Action;
 import com.green3.evolution.game.action.*;
 
@@ -38,6 +39,9 @@ public class GameActionFactory {
                 break;
             case CHOOSE_GAME:
                 action = new EmptyAction();
+                break;
+            case START_GAME:
+                action = new StartGameAction();
                 break;
             default:
                 action = new GetGameboardAction();

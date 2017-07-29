@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.green3.evolution.game.action;
+package com.green3.evolution.action.core;
 
 /**
  *
  * @author Alex_Ihnatsiuck
  */
-public enum GameActionType {
-    FEED, USE_CARD, GET_GAMEBOARD, GET_CARDS, NEW_GAME, INIT_GAME, USER_GAMES, CHOOSE_GAME, START_GAME   
+public enum CoreActionType {
+     LOGIN, LOGOUT, REGISTER
 }

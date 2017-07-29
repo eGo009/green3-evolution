@@ -8,6 +8,16 @@
         <servlet-name>GameServlet</servlet-name>
         <url-pattern>/game</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CoreServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.CoreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CoreServlet</servlet-name>
+        <url-pattern>/core</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

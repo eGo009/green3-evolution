@@ -6,6 +6,10 @@
 package com.green3.evolution.game.servlet;
 
 import com.green3.evolution.action.Action;
+import com.green3.evolution.action.core.CoreActionType;
+import com.green3.evolution.core.factory.CoreActionFactory;
+import com.green3.evolution.core.model.User;
+import com.green3.evolution.game.CoreConstants;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alex_Ihnatsiuck
  */
-public class GameServlet extends HttpServlet {
+public class CoreServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,11 +44,11 @@ public class GameServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String operation = (String) request.getParameter(GameConstants.PARAM_OPERATION);
-        GameActionType operationType = GameActionType.GET_GAMEBOARD;
+        CoreActionType operationType = CoreActionType.LOGIN;
         if (null!=operation && !operation.isEmpty()){
-            operationType = GameActionType.valueOf(operation.toUpperCase());
+            operationType = CoreActionType.valueOf(operation.toUpperCase());
         }
-        Action action = GameActionFactory.createAction(operationType);
+        Action action = CoreActionFactory.createAction(operationType);
         if (null==action){
             return;
         }
@@ -52,39 +56,14 @@ public class GameServlet extends HttpServlet {
         CommonEntity model = action.execute(params);
         
         switch (operationType){
-            case FEED: 
-                break;
-            case USE_CARD:
-                  break;
-            case GET_GAMEBOARD:
-                request.setAttribute("gameboard", model);
-                getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
-                break;
-            case GET_CARDS:
-                break;
-            case NEW_GAME:
-                int gameId = ((GameBoard) model).getId();
+            case LOGIN: 
+                String login = ((User) model).getLogin();
                 HttpSession session = request.getSession();
-                session.setAttribute(GameConstants.PARAM_GAME_ID, gameId);
-                response.sendRedirect("/green3-evolution/game");
-                break;
-            case USER_GAMES:
-                request.setAttribute("gameContainer", model);
-                getServletContext().getRequestDispatcher("/jsp/my-games.jsp").forward(request, response);
-                break;
-            case CHOOSE_GAME:
-                String gameIdParam = (String) request.getParameter(GameConstants.PARAM_GAME_ID);
-                gameId = Integer.valueOf(gameIdParam);
-                session = request.getSession();
-                session.setAttribute(GameConstants.PARAM_GAME_ID, gameId);
-                response.sendRedirect("/green3-evolution/game");
-                break;
-            case START_GAME: 
-                response.sendRedirect("/green3-evolution/game");
+                session.setAttribute(GameConstants.PARAM_USER_ID, login);
+                response.sendRedirect("/green3-evolution/");
                 break;
             default:
-                request.setAttribute("gameboard", model);
-                getServletContext().getRequestDispatcher("/jsp/game/gameboard.jsp").forward(request, response);
+                response.sendRedirect("/green3-evolution/");
         }
     }
 
@@ -127,19 +106,27 @@ public class GameServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private Map<String, Object> createParamsMap(HttpServletRequest request, GameActionType operationType) {
+    private Map<String, Object> createParamsMap(HttpServletRequest request, CoreActionType operationType) {
         Map<String, Object> paramsMap = new HashMap<String,Object>();
-        Object gameIdParam = request.getSession().getAttribute("gameId");
-        if (gameIdParam!=null){
-            int gameId = (int)gameIdParam;
-            paramsMap.put(GameConstants.PARAM_GAME_ID, gameId);
-        }
         
         Object userIdParam = request.getSession().getAttribute("userId");
         if (userIdParam!=null){
             String userId = (String)userIdParam;
             paramsMap.put(GameConstants.PARAM_USER_ID, userId);
         }
+
+        switch (operationType){
+            case LOGIN:
+                String login = (String) request.getParameter(CoreConstants.PARAM_USER_LOGIN);
+                String password = (String) request.getParameter(CoreConstants.PARAM_USER_PASSWORD);                
+                paramsMap.put(CoreConstants.PARAM_USER_LOGIN, login);
+                paramsMap.put(CoreConstants.PARAM_USER_PASSWORD, password);
+                break;
+            default:
+                break;
+                
+        }
+        
         return paramsMap;
     }
 

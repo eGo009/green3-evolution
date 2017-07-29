@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -34,7 +35,14 @@
                 <div id="tooplate_header"> 
                     <div id="tooplate_menu">
                         <ul>
-                            <li><a href="">Hi, Player!</a></li>
+                            <c:choose>
+                                <c:when test="${not empty userId}">
+                                    <li><a href="">Hi, ${userId}!</a></li>
+                                </c:when>
+                                <c:otherwise>                                
+                                    <li><a href="">Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li><a href="/green3-evolution/game?op=new_game">New Game</a></li>
                             <li><a href="#aboutus">Join Game</a></li>
                             <li><a href="/green3-evolution/game?op=user_games">My Games</a></li>

@@ -5,7 +5,6 @@
  */
 package com.green3.evolution.game.action;
 
-import com.green3.evolution.action.DBAction;
 import com.green3.evolution.model.CommonEntity;
 
 import java.sql.Connection;
@@ -18,7 +17,7 @@ import java.util.Map;
  *
  * @author Alex_Ihnatsiuck
  */
-public class GetCardsAction extends DBAction{
+public class GetCardsAction extends GameAction{
     
     
     
