@@ -43,6 +43,12 @@ public class GameActionFactory {
             case START_GAME:
                 action = new StartGameAction();
                 break;
+            case LIST_CREATED_GAMES:
+                action = new GetHostedGamesAction();
+                break;
+            case JOIN_GAME:
+                action = new JoinGameAction();
+                break;
             default:
                 action = new GetGameboardAction();
         }

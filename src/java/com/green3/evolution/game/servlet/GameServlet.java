@@ -127,7 +127,7 @@ public class GameServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private Map<String, Object> createParamsMap(HttpServletRequest request, GameActionType operationType) {
+    protected Map<String, Object> createParamsMap(HttpServletRequest request, GameActionType operationType) {
         Map<String, Object> paramsMap = new HashMap<String,Object>();
         Object gameIdParam = request.getSession().getAttribute("gameId");
         if (gameIdParam!=null){

@@ -6,7 +6,6 @@
 package com.green3.evolution.game.action;
 
 import com.green3.evolution.game.GameConstants;
-import com.green3.evolution.game.model.GameBoard;
 import com.green3.evolution.model.CommonEntity;
 
 import java.sql.Connection;
@@ -15,17 +14,15 @@ import java.util.Map;
  *
  * @author Alex_Ihnatsiuck
  */
-public class NewGameAction extends GameAction{
+public class JoinGameAction extends GameAction{
     
     
     
     @Override
     public CommonEntity doAction(Connection connection, Map<String,Object> params){
-        int gameId = getGameManager().createNewGame(connection);
         String userId = (String)params.get(GameConstants.PARAM_USER_ID);
-        getGameManager().addPlayerToGame(connection, gameId, userId);
-        GameBoard game = new GameBoard();
-        game.setId(gameId);
-        return game;
+        String gameId = (String)params.get(GameConstants.PARAM_GAME_ID);        
+        getGameManager().addPlayerToGame(connection, Integer.valueOf(gameId), userId);
+        return null;
     }
 }

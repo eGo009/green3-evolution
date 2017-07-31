@@ -166,6 +166,28 @@ public class GameManager {
         }
         return games;
     }
+    
+     public GamesContainer getHostedGames(String userId, Connection con) {
+        GamesContainer games = new GamesContainer();
+        try {
+            PreparedStatement getHostedGamesStatement = con.prepareStatement("SELECT g.id FROM ev_g_player AS p \n"
+                    + "JOIN ev_g_game AS g ON p.game_id=g.id\n"
+                    + "WHERE NOT p.user_id=? AND g.state=?;");
+            getHostedGamesStatement.setString(1, userId);
+            getHostedGamesStatement.setInt(2, 0);
+            ResultSet rs = getHostedGamesStatement.executeQuery();
+
+            while (rs.next()) {
+                GameBoard game = new GameBoard();
+                game.setId(rs.getInt("id"));
+                game.setStatus(0);
+                games.getCreatedGames().add(game);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewGameAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return games;
+    }
 
     public int createNewGame(Connection connection) {
         int newGameId = -1;
@@ -188,8 +210,17 @@ public class GameManager {
         return newGameId;
     }
 
-    public void addPlayerToGame(int gameId, String userId) {
-
+    public void addPlayerToGame(Connection connection, int gameId, String userId) {
+       try {
+            PreparedStatement addPlayerStatement = connection.prepareStatement("insert into ev_g_player (user_id, game_id) VALUES (?,?);",
+                             Statement.RETURN_GENERATED_KEYS);
+            addPlayerStatement.setString(1, userId);
+            addPlayerStatement.setInt(2, gameId);
+            addPlayerStatement.execute();
+       }
+       catch (SQLException ex) {
+            Logger.getLogger(NewGameAction.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     public void createCardDeck(Connection connection, int gameId, List<Integer> cardIds) {

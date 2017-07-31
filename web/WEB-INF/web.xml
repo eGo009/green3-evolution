@@ -18,6 +18,33 @@
         <url-pattern>/core</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ListCreatedGamesServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.ListCreatedGamesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListCreatedGamesServlet</servlet-name>
+        <url-pattern>/hosted</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>JoinGameServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.JoinGameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoinGameServlet</servlet-name>
+        <url-pattern>/joingame</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
