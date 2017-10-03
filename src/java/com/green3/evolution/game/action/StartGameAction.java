@@ -29,10 +29,10 @@ public class StartGameAction extends GameAction{
         
         getGameManager().setInitialCardsToPlayers(gamePlayers, cardIds, gameId, connection);
         
-        //set queue position to players
+        getGameManager().setInitialTurnOrderForPlayers(gamePlayers, connection);
         
-        //update game to "started" state
-       
+        getGameManager().changeGameState(gameId, 1, connection);
+      
        return null;
     } 
 }

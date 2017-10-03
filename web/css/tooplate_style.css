@@ -108,7 +108,7 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 }
 
 #tooplate_wrapper {
-	width: 800px;
+	width: 2000px;
 	margin: 0 auto;
 	background:  url(../images/tooplate_body.jpg) center top no-repeat;
 }
@@ -183,16 +183,17 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 
 #tooplate_main {
 	clear: both;
-	width: 800px;
+	width: 2000px;
 }
 
 .content_box { 
 	clear: both; 
-	width: 800px; 
+	width: 2000px; 
+        background: #ccc;
 }
 
 .content_title { 
-	width: 700px; 
+	width: 2000px; 
 	height: 30px; 
 	padding: 15px 50px; 
 }
@@ -202,8 +203,7 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 }
 
 .content { 
-	padding: 30px 50px; 
-	background: url(../images/tooplate_content.png) repeat-y; 
+	padding: 30px 50px; 	
 }
 
 .content_bottom { 

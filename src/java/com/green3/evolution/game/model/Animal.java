@@ -13,11 +13,12 @@ import java.util.List;
  *
  * @author Alex_Ihnatsiuck
  */
-public class Card implements Serializable, CommonEntity{
+public class Animal implements Serializable, CommonEntity{
     
     private int id;
    
-    private List<Property> properties;    
+    private List<Property> properties;
+    
    
     public void setId(int pId){
         id = pId;
@@ -35,8 +36,6 @@ public class Card implements Serializable, CommonEntity{
     public List<Property> getProperties(){
         return properties;
     }
-
+    
   
-    
-    
 }

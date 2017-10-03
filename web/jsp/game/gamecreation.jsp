@@ -34,7 +34,14 @@
                 <div id="tooplate_header"> 
                     <div id="tooplate_menu">
                         <ul>
-                            <li><a href="">Hi, Player!</a></li>
+                            <c:choose>
+                                <c:when test="${not empty userId}">
+                                    <li><a href="">Hi, ${userId}!</a></li>
+                                </c:when>
+                                <c:otherwise>                                
+                                    <li><a href="">Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li><a href="#home">New Game</a></li>
                             <li><a href="#aboutus">Join Game</a></li>
                             <li><a href="#blog">Rules</a></li>

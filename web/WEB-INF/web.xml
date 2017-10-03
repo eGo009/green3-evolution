@@ -45,6 +45,15 @@
         <url-pattern>/joingame</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ApplyCardServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.ApplyCardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplyCardServlet</servlet-name>
+        <url-pattern>/applycard</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
