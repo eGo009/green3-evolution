@@ -18,13 +18,12 @@ public class GamesContainer implements Serializable, CommonEntity{
     
     private List<GameBoard> createdGames;
     private List<GameBoard> ongoingGames;
-    private List<GameBoard> finishedGames;
+    private List<GameBoard> finishedGames;    
     
     public GamesContainer(){
         createdGames = new ArrayList<GameBoard>();
         ongoingGames = new ArrayList<GameBoard>();
-        finishedGames = new ArrayList<GameBoard>();
-        
+        finishedGames = new ArrayList<GameBoard>();     
     }
     
     public void setCreatedGames(List<GameBoard> pCreatedGames){
@@ -50,5 +49,7 @@ public class GamesContainer implements Serializable, CommonEntity{
     public List<GameBoard> getFinishedGames(){
         return finishedGames;
     }   
+  
+    
     
 }

@@ -31,8 +31,11 @@ public class GameBoard implements Serializable, CommonEntity{
     private int status;
     private List<Card> cardDeck;
     private List<Player> players;
-    private int cardsLeft;   
-    
+    private int cardsLeft;
+    private int supply; 
+    private int defendingAnimalId; 
+    private int attackingAnimalId;
+    private int intellectualAnimalId;
     
      
     public void setNumber(int pNumber){
@@ -107,8 +110,34 @@ public class GameBoard implements Serializable, CommonEntity{
     public String getTurnPlayer(){
         int minOrder = Integer.MAX_VALUE;
         String turnPlayer = "";
+        boolean playerFound = false;
         for (Player player : getPlayers()){
-            if (player.getActionOrder() < minOrder){
+            if (getIntellectualAnimalId() > 0){
+                for (Animal animal : player.getAnimals()){
+                    if (animal.getId() == getIntellectualAnimalId()){
+                        turnPlayer = player.getUser();
+                        playerFound = true;
+                        break;
+                    }
+                }
+                if (playerFound){
+                    break;
+                }
+            }
+            else if (getDefendingAnimalId() > 0){
+                for (Animal animal : player.getAnimals()){
+                    if (animal.getId() == getDefendingAnimalId()){
+                        turnPlayer = player.getUser();
+                        playerFound = true;
+                        break;
+                    }
+                }
+                if (playerFound){
+                    break;
+                }
+            }
+            
+            if (player.getActionOrder() != -1 && player.getActionOrder() < minOrder){
                 minOrder = player.getActionOrder();
                 turnPlayer = player.getUser();
             }
@@ -116,100 +145,70 @@ public class GameBoard implements Serializable, CommonEntity{
         return turnPlayer;
     }
     
-    /*public void setAvailableAnimalsToCards(){
+    public int getSpecializationACount(){
+        int specializationACount = 0;
         for (Player player : getPlayers()){
-            for (Card card : player.getCardsOnHand()){
-                for (Property prop : card.getProperties()){
-                   int cardType = prop.getType();
-                   switch (cardType){
-                       case 0:
-                           break;
-                       case 1:
-                           break;
-                       case 2:
-                           break;
-                       case 3:
-                           break;
-                       case 4:
-                           break;
-                       case 5:
-                           break;
-                       case 6:
-                           break;
-                       case 7:
-                           break;
-                       case 8:
-                           break;
-                       case 9:
-                           break;
-                       case 10:
-                           break;
-                       case 11:
-                           break;
-                       case 12:
-                           break;
-                       case 13:
-                           break;
-                       case 14:
-                           break;
-                       case 15:
-                           break;
-                       case 16:
-                           break;
-                       case 17:
-                           break;
-                       case 18:
-                           break;
-                       case 19:
-                           break;
-                       case 20:
-                           break;
-                       case 21:
-                           break;
-                       case 22:
-                           break;
-                       case 23:
-                           break;
-                       case 24:
-                           break;
-                       case 25:
-                           break;
-                       case 26:
-                           break;
-                       case 27:
-                           break;
-                       case 28:
-                           break;
-                       case 29:
-                           break;
-                       case 30:
-                           break;
-                       case 31:
-                           break;
-                       case 32:
-                           break;
-                       case 33:
-                           break;
-                       case 34:
-                           break;
-                       case 35:
-                           break;
-                       case 36:
-                           break;
-                       case 37:
-                           break;
-                       case 38:
-                           break;
-                       case 39:
-                           break;
-                       case 40:
-                           break;
-                       case 41:
-                           break;                               
-                   }
-                }
-            }
+            specializationACount += player.getSpecializationACount();
         }
-    }*/
+        return specializationACount;
+    }
+
+    /**
+     * @return the supply
+     */
+    public int getSupply() {
+        return supply;
+    }
+
+    /**
+     * @param supply the supply to set
+     */
+    public void setSupply(int supply) {
+        this.supply = supply;
+    }
+
+    /**
+     * @return the defendingAnimalId
+     */
+    public int getDefendingAnimalId() {
+        return defendingAnimalId;
+    }
+
+    /**
+     * @param defendingAnimalId the defendingAnimalId to set
+     */
+    public void setDefendingAnimalId(int defendingAnimalId) {
+        this.defendingAnimalId = defendingAnimalId;
+    }
+
+    /**
+     * @return the attackingAnimalId
+     */
+    public int getAttackingAnimalId() {
+        return attackingAnimalId;
+    }
+
+    /**
+     * @param attackingAnimalId the attackingAnimalId to set
+     */
+    public void setAttackingAnimalId(int attackingAnimalId) {
+        this.attackingAnimalId = attackingAnimalId;
+    }
+
+    /**
+     * @return the intellectualAnimalId
+     */
+    public int getIntellectualAnimalId() {
+        return intellectualAnimalId;
+    }
+
+    /**
+     * @param intellectualAnimalId the intellectualAnimalId to set
+     */
+    public void setIntellectualAnimalId(int intellectualAnimalId) {
+        this.intellectualAnimalId = intellectualAnimalId;
+    }
+    
+       
     
 }

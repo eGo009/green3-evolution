@@ -54,6 +54,132 @@
         <url-pattern>/applycard</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>PassTurnServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.PassTurnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PassTurnServlet</servlet-name>
+        <url-pattern>/pass</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PassFeedingServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.PassFeedingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PassFeedingServlet</servlet-name>
+        <url-pattern>/passfeed</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GenerateSupplyServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.GenerateSupplyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GenerateSupplyServlet</servlet-name>
+        <url-pattern>/supply</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>FeedAnimalFromSupplyServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.FeedAnimalFromSupplyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FeedAnimalFromSupplyServlet</servlet-name>
+        <url-pattern>/feed</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AttackServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.AttackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AttackServlet</servlet-name>
+        <url-pattern>/attack</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>FinishFeedingServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.FinishFeedingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FinishFeedingServlet</servlet-name>
+        <url-pattern>/finishfeed</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ExtinctionServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.ExtinctionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExtinctionServlet</servlet-name>
+        <url-pattern>/extinction</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>HibernationServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.HibernationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HibernationServlet</servlet-name>
+        <url-pattern>/hibernation</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SpecializationServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.SpecializationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpecializationServlet</servlet-name>
+        <url-pattern>/specialization</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LossTailServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.LossTailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LossTailServlet</servlet-name>
+        <url-pattern>/loss</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>MetamorphoseServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.MetamorphoseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MetamorphoseServlet</servlet-name>
+        <url-pattern>/metamorphose</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>MimicryServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.MimicryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MimicryServlet</servlet-name>
+        <url-pattern>/mimic</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RunServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.RunServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RunServlet</servlet-name>
+        <url-pattern>/run</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BlockingAttackServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.BlockingAttackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlockingAttackServlet</servlet-name>
+        <url-pattern>/block</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

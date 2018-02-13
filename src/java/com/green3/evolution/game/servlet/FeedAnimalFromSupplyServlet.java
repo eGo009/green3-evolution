@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.green3.evolution.game.model.Error;
 import com.green3.evolution.game.GameConstants;
-import com.green3.evolution.game.action.ApplyCardAction;
+import com.green3.evolution.game.action.FeedAnimalFromSupplyAction;
 import com.green3.evolution.game.action.GameActionType;
 import com.green3.evolution.model.CommonEntity;
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @author Alex_Ihnatsiuck
  */
-public class ApplyCardServlet extends GameServlet {
+public class FeedAnimalFromSupplyServlet extends GameServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +37,21 @@ public class ApplyCardServlet extends GameServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         GameActionType operationType = GameActionType.JOIN_GAME;
-        Action action = new ApplyCardAction();
+        Action action = new FeedAnimalFromSupplyAction();
 
-        String playerIdParam = request.getParameter(GameConstants.PARAM_PLAYER_ID);
-        String cardIdParam = request.getParameter(GameConstants.PARAM_CARD_ID);
-        String propertyTypeParam = request.getParameter(GameConstants.PARAM_PROPERTY_TYPE);
         String animalIdParam = request.getParameter(GameConstants.PARAM_ANIMAL_ID);
         if (animalIdParam == null || "".equals(animalIdParam)){
-            animalIdParam = "-1";
-        }
-        String linkedAnimalIdParam = request.getParameter(GameConstants.PARAM_LINKED_ANIMAL_ID);
-        if (linkedAnimalIdParam == null || "".equals(linkedAnimalIdParam)){
-            linkedAnimalIdParam = "-1";
-        }
+            response.sendRedirect("/green3-evolution/game?error=3");
+            return;
+        }   
         
+        String playerIdParam = request.getParameter(GameConstants.PARAM_PLAYER_ID);
+        if (playerIdParam == null || "".equals(playerIdParam)){
+            response.sendRedirect("/green3-evolution/game?error=3");
+            return;
+        }  
         
-        Map<String,Object> params = createParamsMap(request, operationType, playerIdParam, cardIdParam, propertyTypeParam, animalIdParam, linkedAnimalIdParam);
+        Map<String,Object> params = createParamsMap(request, operationType, animalIdParam, playerIdParam);
         CommonEntity error = action.execute(params);
         if (error != null){
             response.sendRedirect("/green3-evolution/game?error="+((Error)error).getCode());
@@ -61,14 +60,11 @@ public class ApplyCardServlet extends GameServlet {
         response.sendRedirect("/green3-evolution/game");
     }
     
-    protected Map<String, Object> createParamsMap(HttpServletRequest request, GameActionType operationType, String playerIdParam, String cardIdParam, String propertyTypeParam, String animalIdParam, String linkedAnimalIdParam) {
+    protected Map<String, Object> createParamsMap(HttpServletRequest request, GameActionType operationType,String animalIdParam,String playerIdParam) {
         Map<String, Object> params = super.createParamsMap(request, operationType);
         
-        params.put(GameConstants.PARAM_PLAYER_ID, playerIdParam);
-        params.put(GameConstants.PARAM_CARD_ID, cardIdParam);
-        params.put(GameConstants.PARAM_PROPERTY_TYPE, propertyTypeParam);
         params.put(GameConstants.PARAM_ANIMAL_ID, animalIdParam);
-        params.put(GameConstants.PARAM_LINKED_ANIMAL_ID, linkedAnimalIdParam);
+        params.put(GameConstants.PARAM_PLAYER_ID, playerIdParam);
         return params;
     }
     

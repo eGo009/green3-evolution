@@ -16,7 +16,9 @@ public class GameConstants {
     public static final String PARAM_PLAYER_ID = "playerId";
     public static final String PARAM_CARD_ID = "cardId";
     public static final String PARAM_PROPERTY_TYPE = "propertyType";
+    public static final String PARAM_PROPERTY_ID = "propertyId";
     public static final String PARAM_ANIMAL_ID = "animalId";
     public static final String PARAM_LINKED_ANIMAL_ID = "linkedAnimalId";
-    
+    public static final String PARAM_MIMIC_ANIMAL_ID = "mimicAnimalId";
+    public static final String PARAM_ERROR = "error";
 }

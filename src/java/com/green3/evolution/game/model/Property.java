@@ -13,41 +13,44 @@ import java.util.List;
  *
  * @author Alex_Ihnatsiuck
  */
-public class Property implements Serializable, CommonEntity{
-    
+public class Property implements Serializable, CommonEntity {
+
     private int id;
     private int type;
     private String description;
     private int linkedAnimalId;
     private boolean sub;
+    private int active;
+    private int refreshing;
+
     
     private List<Animal> animals;
-    
-    public void setId(int pId){
+
+    public void setId(int pId) {
         id = pId;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
-    } 
-    
-    public void setType(int pType){
+    }
+
+    public void setType(int pType) {
         type = pType;
     }
 
-    public int getType(){
+    public int getType() {
         return type;
     }
-    
-    public void setDescription(String pDescription){
+
+    public void setDescription(String pDescription) {
         description = pDescription;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
-    
-            /**
+
+    /**
      * @return the animals
      */
     public List<Animal> getAnimals() {
@@ -59,14 +62,30 @@ public class Property implements Serializable, CommonEntity{
      */
     public void setAnimals(List<Animal> animals) {
         this.animals = animals;
-    }      
-    
-    public boolean isAnimal(){
+    }
+
+    public boolean isAnimal() {
         return (getType() == 0) || (getType() == 29);
     }
-    
-    public boolean isTwin(){
-        return (getType() == 21) || (getType() == 32) || (getType() == 37) || (getType() == 41);
+
+    public boolean isTwin() {
+        return (getType() == 17) || (getType() == 21) || (getType() == 32) || (getType() == 37) || (getType() == 41);
+    }
+
+    public int getNeddedFeed() {
+        switch (getType()) {
+            case 36:
+                return 2;
+            case 1:
+            case 4:
+            case 10:
+            case 26:
+            case 31:
+            case 41:
+                return 1;
+            default:
+                return 0;
+        }
     }
 
     /**
@@ -96,5 +115,56 @@ public class Property implements Serializable, CommonEntity{
     public void setSub(boolean sub) {
         this.sub = sub;
     }
+
+    /**
+     * @return the active
+     */
+    public boolean isActiveState() {
+        switch (getType()) {
+            case 1:
+            case 13:
+            case 23:
+            case 24:
+            case 31:
+            case 32:
+            case 33:
+            case 35:
+            case 38:
+            case 39:
+                return this.getActive() == 1;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    /**
+     * @return the active
+     */
+    public int getActive() {
+        return active;
+    }
+
+    /**
+     * @return the refreshing
+     */
+    public int getRefreshing() {
+        return refreshing;
+    }
+
+    /**
+     * @param refreshing the refreshing to set
+     */
+    public void setRefreshing(int refreshing) {
+        this.refreshing = refreshing;
+    }
+
+    
     
 }

@@ -7,6 +7,7 @@ package com.green3.evolution.game.action;
 
 import com.green3.evolution.game.GameConstants;
 import com.green3.evolution.model.CommonEntity;
+import com.green3.evolution.game.model.Error;
 
 import java.sql.Connection;
 import java.util.Map;
@@ -25,9 +26,14 @@ public class ApplyCardAction extends GameAction{
         String propertyType = (String)params.get(GameConstants.PARAM_PROPERTY_TYPE);    
         String animalId = (String)params.get(GameConstants.PARAM_ANIMAL_ID);    
         String linkedAnimalId = (String)params.get(GameConstants.PARAM_LINKED_ANIMAL_ID);    
-        
-        getGameManager().applyCard(connection, Integer.valueOf(playerId), Integer.valueOf(cardId), Integer.valueOf(propertyType), Integer.valueOf(animalId), Integer.valueOf(linkedAnimalId));
-        getGameManager().switchStageTurn(connection, Integer.valueOf(playerId));
+        boolean success = getGameManager().applyCard(connection, Integer.valueOf(playerId), Integer.valueOf(cardId), Integer.valueOf(propertyType), Integer.valueOf(animalId), Integer.valueOf(linkedAnimalId));
+        if (success){
+            getGameManager().switchStageTurn(connection, Integer.valueOf(playerId));
+        }
+        else{
+            CommonEntity error = new Error(1);
+            return error;
+        }
                 
         return null;
     }

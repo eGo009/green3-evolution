@@ -33,35 +33,38 @@
             <div id="tooplate_header"> 
                 <div id="tooplate_menu">
                     <ul>
-                        <c:choose>
-                            <c:when test="${not empty userId}">
-                                <li><a href="">Hi, ${userId}!</a></li>
-                            </c:when>
-                            <c:otherwise>                                
-                                <li><a href="">Login</a></li>
-                            </c:otherwise>
-                        </c:choose>
-                        <li><a href="#home">New Game</a></li>
-                        <li><a href="#aboutus">Join Game</a></li>
-                        <li><a href="#blog">Rules</a></li>
-                        <li><a href="#portfolio">Rating</a></li>
-                        <li class="last"><a href="#contactus">Logout</a></li>
-                    </ul>    	
+                            <c:choose>
+                                <c:when test="${not empty userId}">
+                                    <li><a href="">Hi, ${userId}!</a></li>
+                                    <li><a href="/green3-evolution/logout">Logout</a></li>
+                                </c:when>
+                                <c:otherwise>                                
+                                    <li><a href="/green3-evolution/login">Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                            <li><a href="/green3-evolution/game?op=new_game">New Game</a></li>
+                            <li><a href="/green3-evolution/game?op=user_games">My Games</a></li>
+                            <li class="last"><a href="/green3-evolution/">Home</a></li>                            
+                            
+                        </ul>    	
                 </div> <!-- end of tooplate_menu -->         
             </div> <!-- end of header -->
-            <div id="tooplate_main">
-                <c:if test="${not empty gameContainer.createdGames}">
+            <div id="tooplate_main">                
                    <div class="content_box">
                         <div class="content_title content_ct"><h2>Join game:</h2></div>
-                        <div class="content">                            
+                        <div class="content"> 
+                            <c:if test="${not empty gameContainer.createdGames}">
                             <ul>
                                 <c:forEach var="gameItem" items="${gameContainer.createdGames}">
                                     <li><a href="/green3-evolution/joingame?gameId=${gameItem.id}">Game ${gameItem.id}</a></li>
                                 </c:forEach>
                             </ul>
+                            </c:if>
+                            <c:if test="${empty gameContainer.createdGames}">
+                                There are no hosted games
+                            </c:if>    
                         </div> 
-                   </div>
-                </c:if>                
+                   </div>                          
             </div>            
         </div>
     </div>

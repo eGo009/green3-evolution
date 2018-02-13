@@ -38,17 +38,16 @@
                             <c:choose>
                                 <c:when test="${not empty userId}">
                                     <li><a href="">Hi, ${userId}!</a></li>
+                                    <li><a href="/green3-evolution/logout">Logout</a></li>
                                 </c:when>
                                 <c:otherwise>                                
-                                    <li><a href="">Login</a></li>
+                                    <li><a href="/green3-evolution/login">Login</a></li>
                                 </c:otherwise>
                             </c:choose>
                             <li><a href="/green3-evolution/game?op=new_game">New Game</a></li>
                             <li><a href="/green3-evolution/hosted">Join Game</a></li>
-                            <li><a href="/green3-evolution/game?op=user_games">My Games</a></li>
-                            <li><a href="#blog">Rules</a></li>
-                            <li><a href="#portfolio">Rating</a></li>
-                            <li class="last"><a href="/green3-evolution/logout">Logout</a></li>
+                            <li class="last"><a href="/green3-evolution/game?op=user_games">My Games</a></li>                            
+                            
                         </ul>    	
                     </div> <!-- end of tooplate_menu -->         
                 </div> <!-- end of header -->

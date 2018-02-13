@@ -19,9 +19,6 @@ public class GameActionFactory {
     public static Action createAction(GameActionType actionType){
         Action action = null;
         switch (actionType){
-            case FEED: 
-                action = new FeedAction();
-                break;
             case USE_CARD:
                 action = new UseCardAction();
                 break;
