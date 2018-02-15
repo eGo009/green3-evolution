@@ -234,14 +234,22 @@
                                                                     <tr>
                                                                         <td>
                                                                             ${property.description}<c:if test="${property.linkedAnimalId > 0}">-#${property.linkedAnimalId}</c:if>
-                                                                            <c:if test="${(property.active eq 1) and (player.active eq 1) and (gameboard.turnPlayer eq userId) and (player.user eq userId)}">
+                                                                            <c:if test="${(property.active eq 1 or property.active eq 2) and (player.active eq 1) and (gameboard.turnPlayer eq userId) and (player.user eq userId)}">
                                                                                 <c:choose>
-                                                                                    <c:when test="${property.type eq 1 and defMode eq 'off' and (animal.feed < animal.neededFeed) and animal.inShell eq 0}">
+                                                                                    <c:when test="${property.type eq 1 and defMode eq 'off' and ((animal.feed + animal.emptyFatTissueSize) < animal.neededFeed) and animal.inShell eq 0}">
                                                                                         <form action="attack">
                                                                                             <input type="hidden" name="playerId" value="${player.id}"/>
                                                                                             <input type="hidden" name="linkedAnimalId" value="${animal.id}"/>
                                                                                             Animal #<input type="text" name="animalId" size="3"/><br/>
                                                                                             <input type="submit" value="Attack"/>
+                                                                                        </form>
+                                                                                    </c:when>
+                                                                                    <c:when test="${property.type eq 3 and defMode eq 'off' and (animal.feed < animal.neededFeed) and property.active eq 2}">
+                                                                                        <form action="fatburn">
+                                                                                            <input type="hidden" name="playerId" value="${player.id}"/>
+                                                                                            <input type="hidden" name="propertyId" value="${property.id}"/>
+                                                                                            <input type="hidden" name="animalId" value="${animal.id}"/>                                                       
+                                                                                            <input type="submit" value="Use"/>
                                                                                         </form>
                                                                                     </c:when>
                                                                                     <c:when test="${property.type eq 12 and defMode eq 'on' and gameboard.defendingAnimalId eq animal.id}">

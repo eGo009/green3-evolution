@@ -180,6 +180,15 @@
         <url-pattern>/block</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>FatburnServlet</servlet-name>
+        <servlet-class>com.green3.evolution.game.servlet.FatburnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FatburnServlet</servlet-name>
+        <url-pattern>/fatburn</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

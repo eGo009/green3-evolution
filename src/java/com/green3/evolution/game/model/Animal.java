@@ -7,6 +7,7 @@ package com.green3.evolution.game.model;
 
 import com.green3.evolution.model.CommonEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,6 +75,42 @@ public class Animal implements Serializable, CommonEntity{
         
         return neededFeed;
     }
+    
+    public List<Property> getFatTissueProps(){
+        List<Property> fatTissue = new ArrayList<Property>();
+        for (Property prop : getProperties()){
+            if (prop.getType() == 3){
+                fatTissue.add(prop);
+            }            
+        }
+        return fatTissue;
+    }
+    
+    public List<Property> getFilledFatTissueProps(){
+        List<Property> filledFatTissue = new ArrayList<Property>();
+        for (Property prop : getFatTissueProps()){
+            if (prop.getActive() == 2){
+                filledFatTissue.add(prop);
+            }            
+        }
+        return filledFatTissue;
+    }
+    
+    public int getEmptyFatTissueSize(){
+        return getEmptyFatTissueProps().size();
+    }
+    
+    public List<Property> getEmptyFatTissueProps(){
+        List<Property> emptyFatTissue = new ArrayList<Property>();
+        for (Property prop : getFatTissueProps()){
+            if (prop.getActive() == 1){
+                emptyFatTissue.add(prop);
+            }            
+        }
+        return emptyFatTissue;
+    }
+    
+    
     
     public boolean isPredator(){
         for (Property property : getProperties()){

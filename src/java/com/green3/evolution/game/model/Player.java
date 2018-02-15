@@ -123,7 +123,7 @@ public class Player implements Serializable, CommonEntity{
     public int getHungryAnimalsCount(){
         int count = 0;
         for (Animal animal : this.getAnimals()){
-            if (animal.getInShell() == 0 && animal.getFeed() < animal.getNeededFeed()){
+            if ((animal.getInShell() == 0 && animal.getFeed() < animal.getNeededFeed()) || (animal.getEmptyFatTissueProps().size() > 0)){
                 count++;
             }
         }

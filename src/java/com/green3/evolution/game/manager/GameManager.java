@@ -1003,10 +1003,25 @@ public class GameManager {
         Animal animal = getAnimalById(connection, animalId);
         int currentFeed = getCurrentAnimalFeed(animalId, connection);
         int neededFeed = animal.getNeededFeed();
+        List<Property> emptyFatTissue = animal.getEmptyFatTissueProps();
         if (currentFeed >= neededFeed){
-            return false;
+            if (emptyFatTissue.size() == 0){
+                return false;
+            }            
         }
-        updateAnimalFeed(animalId, currentFeed+increment, connection);
+        int foodLeft = currentFeed + increment - neededFeed;
+        int index = 0;
+        while (foodLeft > 0 && emptyFatTissue.size() > index){
+            fillFatTissue(emptyFatTissue.get(index), connection);
+            foodLeft--;
+            index++;
+        }
+        
+        int newFeedValue = currentFeed+increment;
+        if (newFeedValue > neededFeed){
+            newFeedValue = neededFeed;
+        }
+        updateAnimalFeed(animalId, newFeedValue, connection);
         return true;
     }
     
@@ -1806,6 +1821,19 @@ public class GameManager {
         }
         
     }
+
+    private void fillFatTissue(Property fatTissue, Connection connection) {        
+        updatePropertyState(fatTissue.getId(), 2, connection);
+    }
     
+    private void cleanUpFatTissue(Property fatTissue, Connection connection) {        
+        updatePropertyState(fatTissue.getId(), 1, connection);
+    }    
     
+    public void fatburn(int playerId, int animalId, int propertyId, Connection connection){
+        incrementAnimalFeed(animalId, 1, connection);
+        feedLinkedAnimals(animalId, 1, false, connection);
+        cleanUpFatTissue(getPropertyById(propertyId, connection), connection);
+        deactivatePlayer(playerId, connection);
+    }
 }

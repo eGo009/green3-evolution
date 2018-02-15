@@ -10,7 +10,15 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
+ * <b>active</b>:
+ * <ul>
+ * <li>-1 - disabled (by neoplasm)
+ * <li>0 - not active (used)
+ * <li>1 - active
+ * <li>2 - permanently used (filled fat tissue)
+ * <li>9 - blocked (by intellect)
+ * </ul>
+ * 
  * @author Alex_Ihnatsiuck
  */
 public class Property implements Serializable, CommonEntity {
